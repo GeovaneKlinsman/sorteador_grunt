@@ -18,7 +18,7 @@ module.exports  = function (grunt) {
         },
         watch: {
             less:{
-                files: ['src/styles/**/*.less'],  //qualquer arquivo .less, dentro de qualquer pasta dentro de styles será observado (watch).
+                files: ['src/styles/**/*.less'], 
                 tasks: ['less:development']
             },
             html: {
