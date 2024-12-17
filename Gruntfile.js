@@ -1,24 +1,24 @@
-module.exports  = function (grunt) {
+module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         less: {
-            development: {
+            development: {                      //nessa opção estamos desenvolvendo e reproduzindo localmente na maquina
                 files: {
-                    'dev/styles/main.css':'src/styles/main.less'
+                    'dev/styles/main.css': 'src/styles/main.less'
                 }
             },
-            production: {
+            production: {                       //nessa opção é o ambiente final na linha de produção vai minificar nosso arquivo css...
                 options: {
                     compress: true,
                 },
                 files: {
-                    'dist/styles/main.min.css':'src/styles/main.less' 
+                    'dist/styles/main.min.css':'src/styles/main.less'
                 }
             }
         },
         watch: {
-            less:{
-                files: ['src/styles/**/*.less'], 
+            less: {
+                files: ['src/styles/**/*.less'],
                 tasks: ['less:development']
             },
             html: {
@@ -75,11 +75,11 @@ module.exports  = function (grunt) {
         htmlmin: {
             dist: {
                 options: {
-                    removeComments: true,
+                    removeComents: true,
                     collapseWhitespace: true
                 },
                 files: {
-                    'prebuild/index.html' : 'src/index.html'
+                    'prebuild/index.html': 'src/index.html'
                 }
             }
         },
@@ -87,21 +87,19 @@ module.exports  = function (grunt) {
         uglify: {
             target: {
                 files: {
-                    'dist/scripts/main.min.js' : 'src/scripts/main.js'
+                    'dist/scripts/main.min.js': 'src/scripts/main.js'
                 }
             }
         }
     })
 
-
-    grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-replace');
-    grunt.loadNpmTasks('grunt-contrib-htmlmin');
-    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-less'); //essa é a chamada do less para ser carregado nossos arquivos
+    grunt.loadNpmTasks('grunt-contrib-watch'); //pluguin para não precisar digitar comando npm run grunt...
+    grunt.loadNpmTasks('grunt-replace'); //pluguin para copiar os arquivos e mover para pastas criadas
+    grunt.loadNpmTasks('grunt-contrib-htmlmin'); //pluguin para minificar o html
+    grunt.loadNpmTasks('grunt-contrib-clean');  //pluguin para apagar pastas
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    grunt.registerTask('default', ['watch']);
+    grunt.registerTask('default', ['watch']); //essa tarefa é a padrão que o grunt exige não precisanos mais referenciar a função com o final olaGrunt como é um array devido as [] podemos referenciar o less e o sass
     grunt.registerTask('build', ['less:production', 'htmlmin:dist', 'replace:dist', 'clean', 'uglify']);
-
 }
