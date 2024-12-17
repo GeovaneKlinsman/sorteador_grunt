@@ -36,7 +36,7 @@ module.exports = function(grunt) {
                         },
                         {
                             match: 'ENDERECO_DO_JS',
-                            replacement: '../src/scripts/main.js'
+                            replacement: './src/scripts/main.js'
                         }
                     ]
                 },
@@ -75,7 +75,7 @@ module.exports = function(grunt) {
         htmlmin: {
             dist: {
                 options: {
-                    removeComents: true,
+                    removeComments: true,
                     collapseWhitespace: true
                 },
                 files: {
